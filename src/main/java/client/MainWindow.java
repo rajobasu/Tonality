@@ -1,67 +1,27 @@
 package client;
 
-import java.awt.Button;
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.Label;
-import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.LinkedList;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import resources.Profile;
-import javax.swing.SwingConstants;
 
 public class MainWindow {
 
 	private int prevFriendNum;
 	private int chatRoomSelected;
 	private int friendSelected;
-	private Profile profile;
-	private Client client;
-	private JFrame frmFriendsconnect;
+	private final Profile profile;
+	private final Client client;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JTextField textField;
-	private JTabbedPane tabbedPane;
-	private JPanel panel_4;
-	private JLabel lblJoinchatRoom;
-	private JScrollPane scrollPane_1;
 	private JPanel panel_6;
-    private JButton btnNewButton_1;
-	private JPanel panel_5;
-	private JLabel lblChatWithFriends;
-	private JScrollPane scrollPane;
 	private JPanel panel_8;
-	private JPanel panel;
-	private JButton btnAddFriend;
-	private JLabel lblName;
-	private JPanel panel_7;
-	private JLabel lblName_1;
-	private JTextArea textArea_3;
-	private JButton btnStart;
-	
-	private JButton btnStart_1;
+
 	private LinkedList<String> chatRooms;
-	private LinkedList<Profile> friends;
 	private JTextField tf_frndReq;
-	private JButton btnFriendRequest;
-	private JPanel panel_1;
 	private JTextArea fndReq;
 
 	/**
@@ -79,11 +39,11 @@ public class MainWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		chatRooms =client.getChatRoomsList();		
-		friends=profile.getFriendList();
+		chatRooms =client.getChatRoomsList();
+		LinkedList<Profile> friends = profile.getFriendList();
 		prevFriendNum=profile.getFriendList().size();
-		
-		frmFriendsconnect = new JFrame();
+
+		JFrame frmFriendsconnect = new JFrame();
 		frmFriendsconnect.setTitle("FriendsConnect");
 		frmFriendsconnect.getContentPane().setBackground(new Color(51, 102, 204));
 		frmFriendsconnect.setResizable(false);
@@ -91,26 +51,26 @@ public class MainWindow {
 		frmFriendsconnect.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmFriendsconnect.getContentPane().setLayout(null);
 		frmFriendsconnect.setVisible(true);
-		
-		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setForeground(SystemColor.textHighlight);
 		tabbedPane.setBounds(8, 239, 421, 204);
 		frmFriendsconnect.getContentPane().add(tabbedPane);
-		
-		panel_4 = new JPanel();
+
+		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(new Color(204, 255, 204));
 		panel_4.setForeground(new Color(153, 255, 153));
 		tabbedPane.addTab("JoinChatRoom", null, panel_4, null);
 		panel_4.setLayout(null);
-		
-		lblJoinchatRoom = new JLabel("Join Chat Room :");
+
+		JLabel lblJoinchatRoom = new JLabel("Join Chat Room :");
 		lblJoinchatRoom.setForeground(new Color(102, 0, 0));
 		lblJoinchatRoom.setFont(new Font("Sitka Text", Font.BOLD, 13));
 		lblJoinchatRoom.setHorizontalAlignment(SwingConstants.CENTER);
 		lblJoinchatRoom.setBounds(0, 0, 120, 26);
 		panel_4.add(lblJoinchatRoom);
-		
-		scrollPane_1 = new JScrollPane();
+
+		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(10, 37, 363, 100);
 		panel_4.add(scrollPane_1);
 		
@@ -122,7 +82,7 @@ public class MainWindow {
 		gbl_panel_6.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_6.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_6.setLayout(gbl_panel_6);
-		btnNewButton_1 = new JButton("Create new Chat Room");
+		JButton btnNewButton_1 = new JButton("Create new Chat Room");
 		btnNewButton_1.setBackground(new Color(255, 255, 204));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -132,31 +92,31 @@ public class MainWindow {
 		});
 		btnNewButton_1.setBounds(10, 142, 363, 23);
 		panel_4.add(btnNewButton_1);
-		
-		btnStart = new JButton("Start");
+
+		JButton btnStart = new JButton("Start");
 		btnStart.setBackground(new Color(255, 255, 204));
 		btnStart.setFont(new Font("Yu Mincho Demibold", Font.BOLD, 15));
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			   new ChatWindow(client,chatRooms.get(chatRoomSelected),profile,0);
+			   new ChatWindowModified(client,chatRooms.get(chatRoomSelected),profile);
 			}
 		});
 		btnStart.setBounds(273, 2, 133, 23);
 		panel_4.add(btnStart);
-		
-		panel_5 = new JPanel();
+
+		JPanel panel_5 = new JPanel();
 		panel_5.setBackground(new Color(204, 204, 255));
 		panel_5.setForeground(new Color(204, 255, 0));
 		tabbedPane.addTab("Converse with friends", null, panel_5, null);
 		panel_5.setLayout(null);
-		
-		lblChatWithFriends = new JLabel("Chat With Friends Individually  :");
+
+		JLabel lblChatWithFriends = new JLabel("Chat With Friends Individually  :");
 		lblChatWithFriends.setForeground(new Color(102, 0, 0));
 		lblChatWithFriends.setFont(new Font("Poor Richard", Font.PLAIN, 16));
 		lblChatWithFriends.setBounds(10, 0, 240, 25);
 		panel_5.add(lblChatWithFriends);
-		
-		scrollPane = new JScrollPane();
+
+		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 23, 396, 127);
 		panel_5.add(scrollPane);
 		
@@ -168,8 +128,8 @@ public class MainWindow {
 		gbl_panel_8.columnWeights = new double[]{0.0, Double.MIN_VALUE};
 		gbl_panel_8.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_8.setLayout(gbl_panel_8);
-		
-		btnStart_1 = new JButton("Start");
+
+		JButton btnStart_1 = new JButton("Start");
 		btnStart_1.setBackground(new Color(255, 255, 204));
 		btnStart_1.setFont(new Font("Poor Richard", Font.PLAIN, 15));
 		btnStart_1.addActionListener(new ActionListener() {
@@ -180,13 +140,13 @@ public class MainWindow {
 		});
 		btnStart_1.setBounds(10, 153, 396, 23);
 		panel_5.add(btnStart_1);
-		
-		panel = new JPanel();
+
+		JPanel panel = new JPanel();
 		panel.setBackground(new Color(153, 51, 0));
 		panel.setBounds(8, 119, 179, 109);
 		frmFriendsconnect.getContentPane().add(panel);
-		
-		btnAddFriend = new JButton("Add Friend");
+
+		JButton btnAddFriend = new JButton("Add Friend");
 		btnAddFriend.setBackground(new Color(255, 255, 204));
 		btnAddFriend.setFont(new Font("Poor Richard", Font.PLAIN, 16));
 		btnAddFriend.setBounds(10, 5, 159, 23);
@@ -203,40 +163,40 @@ public class MainWindow {
 		textField.setBounds(53, 39, 116, 31);
 		panel.add(textField);
 		textField.setColumns(10);
-		
-		lblName = new JLabel("Name :");
+
+		JLabel lblName = new JLabel("Name :");
 		lblName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblName.setForeground(new Color(204, 204, 255));
 		lblName.setBackground(new Color(204, 255, 255));
 		lblName.setBounds(1, 46, 49, 24);
 		panel.add(lblName);
-		
-		panel_7 = new JPanel();
+
+		JPanel panel_7 = new JPanel();
 		panel_7.setBackground(new Color(51, 102, 0));
 		panel_7.setBounds(8, 45, 179, 63);
 		frmFriendsconnect.getContentPane().add(panel_7);
 		panel_7.setLayout(null);
-		
-		lblName_1 = new JLabel("Name :");
+
+		JLabel lblName_1 = new JLabel("Name :");
 		lblName_1.setForeground(new Color(255, 153, 153));
 		lblName_1.setFont(new Font("PMingLiU-ExtB", Font.BOLD, 15));
 		lblName_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblName_1.setBounds(0, 25, 64, 27);
 		panel_7.add(lblName_1);
-		
-		textArea_3 = new JTextArea();
+
+		JTextArea textArea_3 = new JTextArea();
 		textArea_3.setBounds(74, 27, 95, 28);
 		textArea_3.setEditable(false);
 		panel_7.add(textArea_3);
 		textArea_3.setText(profile.getUsername());
-		
-		panel_1 = new JPanel();
+
+		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 0, 0));
 		panel_1.setLayout(null);
 		panel_1.setBounds(197, 11, 232, 95);
 		frmFriendsconnect.getContentPane().add(panel_1);
-		
-		btnFriendRequest = new JButton("Friend Request");
+
+		JButton btnFriendRequest = new JButton("Friend Request");
 		btnFriendRequest.setBackground(new Color(255, 255, 204));
 		btnFriendRequest.setFont(new Font("Poor Richard", Font.PLAIN, 15));
 		btnFriendRequest.addActionListener(new ActionListener() {
@@ -290,7 +250,7 @@ public class MainWindow {
 		GridBagConstraints gbc_btn;
 		////FOR FRIENDS
 		int index=0;
-		for(Profile profile:friends)
+		for(Profile profile: friends)
 		{
 		    btn=new JRadioButton();
 			btn.setActionCommand(Integer.toString(index));
