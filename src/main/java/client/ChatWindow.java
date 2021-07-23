@@ -1,22 +1,13 @@
 package client;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.LinkedList;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.Timer;
-import javax.swing.border.EmptyBorder;
+import javax.swing.*;
+import javax.swing.border.*;
 
 import resources.Profile;
 import resources.UserMessage;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.Dialog.ModalExclusionType;
 
 public class ChatWindow extends JFrame {
 
@@ -41,8 +32,8 @@ public class ChatWindow extends JFrame {
 		System.out.println("Type :: "+type);
 		this.client = client;
  		this.name = name;
-        this.type=type;
- 		this.profile=profile;
+        this.type = type;
+ 		this.profile = profile;
         init();
  	}
 
@@ -58,7 +49,7 @@ public class ChatWindow extends JFrame {
 		setTitle("Chat Window");
 
 		setAlwaysOnTop(true);
-	
+
 		setResizable(false);
 
 		setVisible(true);
@@ -108,15 +99,7 @@ public class ChatWindow extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 
 				if (type == 0) {
-					if (client.haveNewMessage( name, timeStamp)) {
 
-						LinkedList<UserMessage> _msg = client.getChatRoomMessages(name, timeStamp);
-						for (UserMessage message : _msg) {
-							textArea.append("\n" + message.getSenderID() + " ~~>>  " + message.getBody());
-						}
-						timeStamp = System.currentTimeMillis();
-						System.out.println("New Message Received ");
-					}
 				} else if (type == 1) {
 
 					if(client.haveNewMessage(profile.getUsername(), friend.getUsername(), timeStamp)){
