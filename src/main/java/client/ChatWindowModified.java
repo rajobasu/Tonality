@@ -84,6 +84,7 @@ public class ChatWindowModified extends JFrame {
                 for (UserMessage message : _msg) {
                     var ta = new JTextArea();
                     ta.setText(message.getSenderID() + " ~~>>  " + message.getBody());
+                    ta.setBackground(message.getColor().getColor());
                     ta.setMaximumSize(new Dimension(450, 30));
                     textAreaContainerPanel.add(ta);
                     textAreaContainerPanel.revalidate();
