@@ -2,7 +2,7 @@ package resources;
 
 import java.io.Serializable;
 
-import client.SenderTextSentimentModification;
+import client.SenderTextToneParser;
 
 public class UserMessage implements Serializable {
 
@@ -21,8 +21,8 @@ public class UserMessage implements Serializable {
     }
 
     public UserMessage(String body, String senderID, String receiverID) {
-        this(SenderTextSentimentModification.removeArgs(body), senderID, receiverID,
-            SenderTextSentimentModification.getToneOfText(body));
+        this(SenderTextToneParser.removeArgs(body), senderID, receiverID,
+            SenderTextToneParser.getToneOfText(body));
     }
 
 
