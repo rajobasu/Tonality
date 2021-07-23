@@ -13,3 +13,4 @@ src/main/resources/docs/
 /config.json
 /preferences.json
 /*.log.*
+/.gradle/
