@@ -2,24 +2,27 @@ package resources;
 
 import java.io.Serializable;
 
+import client.SenderTextToneParser;
+
 public class UserMessage implements Serializable {
 
     private String senderID;
     private String receiverID;
     private String body;
-    private Colors color;
+    private Tone tone;
     private long timeStamp;
 
-    public UserMessage(String body, String senderID, String receiverID, Colors color) {
+    public UserMessage(String body, String senderID, String receiverID, Tone tone) {
         this.body = body;
         this.senderID = senderID;
         this.receiverID = receiverID;
         this.timeStamp = System.currentTimeMillis();
-        this.color = color;
+        this.tone = tone;
     }
 
     public UserMessage(String body, String senderID, String receiverID) {
-		this(body, senderID, receiverID, Colors.getRandomColor());
+        this(SenderTextToneParser.removeArgs(body), senderID, receiverID,
+            SenderTextToneParser.getToneOfText(body));
     }
 
 
@@ -39,8 +42,8 @@ public class UserMessage implements Serializable {
         return timeStamp;
     }
 
-    public Colors getColor() {
-        return color;
+    public Tone getTone() {
+        return tone;
     }
 
     public String toString() {

@@ -3,7 +3,7 @@ package resources;
 import java.awt.*;
 import java.util.Random;
 
-public enum Colors {
+public enum ToneColor {
     GREY(128, 128, 128),
     RED(179, 35, 27),
     GREEN(144, 238, 144),
@@ -18,6 +18,7 @@ public enum Colors {
     HOT_PINK(255, 105, 180),
     LIGHT_PURPLE(197, 139, 231),
     BLOOD_RED(136, 8, 8),
+    WHITE(255, 255, 255),
     PINK(255, 192, 203);
 
 
@@ -26,15 +27,15 @@ public enum Colors {
     private final int b;
     private final String rgb;
 
-    Colors(final int r, final int g, final int b) {
+    ToneColor(final int r, final int g, final int b) {
         this.r = r;
         this.g = g;
         this.b = b;
         this.rgb = r + ", " + g + ", " + b;
     }
 
-    public static Colors getRandomColor() {
-        return Colors.values()[new Random().nextInt(Colors.values().length)];
+    public static ToneColor getRandomColor() {
+        return ToneColor.values()[new Random().nextInt(ToneColor.values().length)];
     }
 
     public String getRGB() {
