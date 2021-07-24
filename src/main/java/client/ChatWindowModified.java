@@ -77,10 +77,11 @@ public class ChatWindowModified extends JFrame {
         sendButton.addActionListener(e -> {
             String text = textField.getText();
             Tone tone = SenderTextToneParser.getToneOfText(text);
-            String modifiedText = updateString(removeArgs(text));
+            LinkedList<String> modifiedText = updateString(removeArgs(text));
             textField.setText("");
-
-            client.addChatRoomMessage(name, modifiedText, profile.getUsername(), tone);
+            modifiedText.forEach(st -> {
+                client.addChatRoomMessage(name, st, profile.getUsername(), tone);
+            });
         });
 
         textSendPanel.add(textField);
