@@ -52,6 +52,7 @@ public class WatsonAPI {
 
 
             var listOfTones = tone.getDocumentTone().getTones();
+            System.out.println(listOfTones);
             System.out.println("Document tone acquired");
             String toneAcquired = listOfTones.stream().reduce((toneScore, toneScore2) -> {
                 if (toneScore.getScore() > toneScore2.getScore()) {

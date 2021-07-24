@@ -23,7 +23,7 @@ public class SenderTextSentimentModification {
             .replaceAll("I am", "I'm")
             .replaceFirst("I don't know", "idk");
 
-        return Arrays.stream(newText.split("\n")).collect(Collectors.toCollection(LinkedList::new));
+        return Arrays.stream(newText.split("\n")).filter(s -> s.trim().length() > 0).collect(Collectors.toCollection(LinkedList::new));
         //try the String "Hello. How are you doing? I am fine! Sorry I have been busy. What you doing."
    }
 }

@@ -51,7 +51,7 @@ public class ChatWindowModified extends JFrame {
         this.setResizable(false);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setSize(450, 400);
+        this.setSize(600, 400);
         this.setLayout(new BorderLayout());
 
         overallContentPane = new JPanel();
@@ -62,11 +62,11 @@ public class ChatWindowModified extends JFrame {
 
         textSendPanel = new JPanel();
         textSendPanel.setLayout(new BoxLayout(textSendPanel, BoxLayout.LINE_AXIS));
-        textSendPanel.setMaximumSize(new Dimension(450, 50));
+        textSendPanel.setMaximumSize(new Dimension(600, 60));
 
         predictiveSentiment = new JPanel();
         predictiveSentiment.setLayout(new BoxLayout(predictiveSentiment, BoxLayout.LINE_AXIS));
-        predictiveSentiment.setMaximumSize(new Dimension(450, 50));
+        predictiveSentiment.setMaximumSize(new Dimension(600, 60));
 
         var messageScrollPane = new JScrollPane(textAreaContainerPanel, ScrollPaneLayout.VERTICAL_SCROLLBAR_ALWAYS,
             ScrollPaneLayout.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -93,7 +93,7 @@ public class ChatWindowModified extends JFrame {
             e -> CompletableFuture.supplyAsync(() -> new WatsonAPI(removeArgs(textField.getText())).result())
                 .thenApply(tone -> {
                     System.out.println("tone has been predicted: " + tone);
-                    prediction.setText(tone.toString());
+                    prediction.setText(tone.getDescription());
                     System.out.println("tone has been predicted: " + tone);
                     return 1;
                 }));
@@ -116,7 +116,7 @@ public class ChatWindowModified extends JFrame {
                     var ta = new JTextArea();
                     ta.setText(message.getSenderID() + " ~~>>  " + message.getBody());
                     ta.setBackground(message.getTone().getAssociatedToneColor().getColor());
-                    ta.setMaximumSize(new Dimension(450, 30));
+                    ta.setMaximumSize(new Dimension(600, 30));
                     textAreaContainerPanel.add(ta);
                     textAreaContainerPanel.revalidate();
                 }
