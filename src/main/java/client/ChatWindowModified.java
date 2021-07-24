@@ -1,12 +1,17 @@
 package client;
 
+import static client.SenderTextSentimentModification.updateString;
+import static client.SenderTextToneParser.removeArgs;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.LinkedList;
+import java.util.concurrent.CompletableFuture;
 
 import javax.swing.*;
 
 import resources.Profile;
+import resources.Tone;
 import resources.UserMessage;
 
 public class ChatWindowModified extends JFrame {
@@ -19,7 +24,10 @@ public class ChatWindowModified extends JFrame {
     private JPanel textAreaContainerPanel;
     private JPanel textSendPanel;
     private JTextField textField;
+    private JPanel predictiveSentiment;
     private long timeStamp;
+    private JTextArea prediction;
+    private JButton checkSentiment;
 
 
     /**
@@ -36,13 +44,14 @@ public class ChatWindowModified extends JFrame {
         init();
     }
 
+
     public void init() {
         this.setTitle("Chat Window");
         this.setAlwaysOnTop(true);
         this.setResizable(false);
         this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(450, 300);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setSize(450, 400);
         this.setLayout(new BorderLayout());
 
         overallContentPane = new JPanel();
@@ -55,6 +64,10 @@ public class ChatWindowModified extends JFrame {
         textSendPanel.setLayout(new BoxLayout(textSendPanel, BoxLayout.LINE_AXIS));
         textSendPanel.setMaximumSize(new Dimension(450, 50));
 
+        predictiveSentiment = new JPanel();
+        predictiveSentiment.setLayout(new BoxLayout(predictiveSentiment, BoxLayout.LINE_AXIS));
+        predictiveSentiment.setMaximumSize(new Dimension(450, 50));
+
         var messageScrollPane = new JScrollPane(textAreaContainerPanel, ScrollPaneLayout.VERTICAL_SCROLLBAR_ALWAYS,
             ScrollPaneLayout.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
@@ -63,16 +76,33 @@ public class ChatWindowModified extends JFrame {
         sendButton = new JButton("send");
         sendButton.addActionListener(e -> {
             String text = textField.getText();
+            Tone tone = SenderTextToneParser.getToneOfText(text);
+            String modifiedText = updateString(removeArgs(text));
             textField.setText("");
-            client.addChatRoomMessage(name, text, profile.getUsername());
+
+            client.addChatRoomMessage(name, modifiedText, profile.getUsername(), tone);
         });
 
         textSendPanel.add(textField);
         textSendPanel.add(sendButton);
 
+        prediction = new JTextArea();
+        checkSentiment = new JButton("Check");
+        checkSentiment.addActionListener(
+            e -> CompletableFuture.supplyAsync(() -> new WatsonAPI(removeArgs(textField.getText())).result())
+                .thenApply(tone -> {
+                    System.out.println("tone has been predicted: " + tone);
+                    prediction.setText(tone.toString());
+                    System.out.println("tone has been predicted: " + tone);
+                    return 1;
+                }));
+
+        predictiveSentiment.add(prediction);
+        predictiveSentiment.add(checkSentiment);
 
         overallContentPane.add(messageScrollPane);
         overallContentPane.add(textSendPanel);
+        overallContentPane.add(predictiveSentiment);
 
         setContentPane(overallContentPane);
 

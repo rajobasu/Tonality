@@ -2,6 +2,7 @@ package client;
 
 public class SenderTextSentimentModification {
 
+
   public static String updateString(String text) {
     String newText = text.replaceAll("what you doing", "wyd").replaceAll("What you doing?", "Wyd!?").
     replaceAll("What are you doing", "Wyd").replaceAll("what are you doing", "wyd")
