@@ -18,8 +18,7 @@ import com.ibm.watson.tone_analyzer.v3.model.ToneOptions;
 import resources.Tone;
 
 public class WatsonAPI {
-    private static final String URL =
-        "https://api.kr-seo.tone-analyzer.watson.cloud.ibm.com/instances/4fe7ca2d-cd04-4b55-9a14-3a1eb423513b";
+    private static final String URL = "https://api.kr-seo.tone-analyzer.watson.cloud.ibm.com/instances/4fe7ca2d-cd04-4b55-9a14-3a1eb423513b";
     private static final String API_KEY = "VVbEu7cipOQb3OKcjG7X09AhwDFnq925gNQ4Blz9lScb";
     private final String textToBeToneAnalyzed;
 
@@ -29,6 +28,8 @@ public class WatsonAPI {
 
     public Tone result() {
         try {
+            System.out.println(API_KEY);
+            System.out.println(URL);
             IamAuthenticator authenticator = new IamAuthenticator(API_KEY);
             ToneAnalyzer toneAnalyzer = new ToneAnalyzer("2017-09-21", authenticator);
             toneAnalyzer.setServiceUrl(URL);
