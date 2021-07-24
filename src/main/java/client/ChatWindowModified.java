@@ -1,5 +1,8 @@
 package client;
 
+import static client.SenderTextSentimentModification.updateString;
+import static client.SenderTextToneParser.removeArgs;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.LinkedList;
@@ -7,6 +10,7 @@ import java.util.LinkedList;
 import javax.swing.*;
 
 import resources.Profile;
+import resources.Tone;
 import resources.UserMessage;
 
 public class ChatWindowModified extends JFrame {
@@ -63,8 +67,10 @@ public class ChatWindowModified extends JFrame {
         sendButton = new JButton("send");
         sendButton.addActionListener(e -> {
             String text = textField.getText();
+            Tone tone = SenderTextToneParser.getToneOfText(text);
+            String modifiedText = updateString(removeArgs(text));
             textField.setText("");
-            client.addChatRoomMessage(name, text, profile.getUsername());
+            client.addChatRoomMessage(name, modifiedText, profile.getUsername(), tone);
         });
 
         textSendPanel.add(textField);

@@ -5,17 +5,17 @@ import java.util.Arrays;
 public enum Tone {
     ANGER("/ag", ToneColor.BLOOD_RED),
     FEAR("/fr", ToneColor.BURGUNDY),
-    JOY("/jy", ToneColor.HOT_PINK),
+    JOY("/jy", ToneColor.GREEN),
     SADNESS("/sd", ToneColor.LIGHT_PURPLE),
     ANALYTICAL("/an", ToneColor.MUTED_RED),
-    CONFIDENT("/cd", ToneColor.LIGHT_ORANGE),
-    SARCASTIC("/sr"),
-    DISAPPOINTMENT("/ds"),
-    JOKING("/jk"),
-    SERIOUS("/sr"),
-    LITTLE_UPSET("/lu"),
-    EXCITED("/"),
-    TENTATIVE("/tt"),
+    CONFIDENT("/cd", ToneColor.ORANGE),
+    SARCASTIC("/sr", ToneColor.GREY),
+    DISAPPOINTMENT("/ds", ToneColor.LIGHTBLUE),
+    JOKING("/jk", ToneColor.YELLOW),
+    SERIOUS("/sr", ToneColor.RED),
+    LITTLE_UPSET("/lu", ToneColor.LIGHT_ORANGE),
+    EXCITED("/", ToneColor.YELLOW_ROSE),
+    TENTATIVE("/tt", ToneColor.HOT_PINK),
     NONE("/NONE");
 
     private String marker;

@@ -49,6 +49,4 @@ public class UserMessage implements Serializable {
     public String toString() {
         return body + " Time :: " + timeStamp;
     }
-
-
 }

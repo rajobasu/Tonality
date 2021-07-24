@@ -20,6 +20,7 @@ import java.util.LinkedList;
 import resources.Profile;
 import resources.Queries;
 import resources.QueryMessage;
+import resources.Tone;
 import resources.User;
 import resources.UserMessage;
 
@@ -264,9 +265,13 @@ public class Client {
 	}
 
 	public void addChatRoomMessage(String name, String body, String senderID) {
+		addChatRoomMessage(name, body, senderID, Tone.NONE);
+	}
+
+	public void addChatRoomMessage(String name, String body, String senderID, Tone tone) {
 		LinkedList<Object> content = new LinkedList<>();
 		content.add(name);
-		content.add(new UserMessage(body, senderID, ""));
+		content.add(new UserMessage(body, senderID, "", tone));
 
 		try {
 			socket = new Socket(host, port);

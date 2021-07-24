@@ -4,22 +4,22 @@ import java.awt.*;
 import java.util.Random;
 
 public enum ToneColor {
-    GREY(128, 128, 128),
-    RED(179, 35, 27),
-    GREEN(144, 238, 144),
-    PURPLE(197, 139, 231),
-    LIGHTBLUE(30, 144, 255),
-    YELLOW(255, 255, 0),
-    ORANGE(255, 127, 80),
-    LIGHT_ORANGE(255, 179, 71),
-    BURGUNDY(172, 89, 94),
-    MUTED_RED(203, 76, 78),
-    YELLOW_ROSE(255, 240, 0),
-    HOT_PINK(255, 105, 180),
-    LIGHT_PURPLE(197, 139, 231),
-    BLOOD_RED(136, 8, 8),
+    GREY(204, 204, 204),
+    RED(232, 135, 131),
+    GREEN(161, 228, 148), //
+    PURPLE(196, 189, 217),
+    LIGHTBLUE(126, 190, 222),
+    YELLOW(247, 246, 192),
+    ORANGE(240, 206, 136),
+    LIGHT_ORANGE(241, 209, 179), //
+    BURGUNDY(210, 158, 233), //
+    MUTED_RED(217, 138, 108), //
+    YELLOW_ROSE(238, 214, 81),
+    HOT_PINK(236, 177, 213),
+    LIGHT_PURPLE(222, 204, 243), //
+    BLOOD_RED(189, 51, 50), //
     WHITE(255, 255, 255),
-    PINK(255, 192, 203);
+    PINK(240, 209, 226);
 
 
     private final int r;
